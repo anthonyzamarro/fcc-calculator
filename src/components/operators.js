@@ -4,7 +4,13 @@ import { connect } from "react-redux";
 
 const Operators = props => {
   return props.opDisplayReducer.map(operator => (
-    <li key={operator.id}>{operator.operation}</li>
+    <li 
+    	key={operator.id}
+      id={operator.id}
+    	onClick={e => props.operatorClicked(operator.operation)}
+    >
+    	{operator.operation}
+    </li>
   ));
 };
 

@@ -6,6 +6,7 @@ const Numbers = props => {
   return props.numDisplayReducer.map(number => (
     <li
       key={number.id}
+      id={number.id}
       onClick={e => props.numberClick(number.number)}
       value={number.number}
     >
