@@ -1,28 +1,24 @@
 export default function opDisplayReducer() {
   return [
     {
-      id: "op-1",
-      operation: "addition"
+      id: "add",
+      operation: "+"
     },
     {
-      id: "op-2",
-      operation: "subtraction"
+      id: "subtract",
+      operation: "-"
     },
     {
-      id: "op-3",
-      operation: "multiplication"
+      id: "multiply",
+      operation: "*"
     },
     {
-      id: "op-4",
-      operation: "division"
+      id: "divide",
+      operation: "/"
     },
     {
-      id: "op-5",
+      id: "clear",
       operation: "clear"
-    },
-    {
-      id: "op-6",
-      operation: "equals"
     }
   ];
 }

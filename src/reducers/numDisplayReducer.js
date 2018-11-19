@@ -1,43 +1,48 @@
 export default function numDisplayReducer() {
   return [
     {
-      id: "1",
+      id: "zero",
+      number: "0"
+    },
+
+    {
+      id: "one",
       number: "1"
     },
     {
-      id: "2",
+      id: "two",
       number: "2"
     },
     {
-      id: "3",
+      id: "three",
       number: "3"
     },
     {
-      id: "4",
+      id: "four",
       number: "4"
     },
     {
-      id: "5",
+      id: "five",
       number: "5"
     },
     {
-      id: "6",
+      id: "six",
       number: "6"
     },
     {
-      id: "7",
+      id: "seven",
       number: "7"
     },
     {
-      id: "8",
+      id: "eight",
       number: "8"
     },
     {
-      id: "9",
+      id: "nine",
       number: "9"
     },
     {
-      id: "10",
+      id: "decimal",
       number: "."
     }
   ];

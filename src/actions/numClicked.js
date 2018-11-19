@@ -3,5 +3,5 @@ export function nClicked(num) {
   return {
     type: "NUMBER_CLICKED",
     payload: num
-  };
+  }
 }

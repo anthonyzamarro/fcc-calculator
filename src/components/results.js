@@ -4,10 +4,13 @@ import { connect } from "react-redux";
 class Results extends Component {
   render() {
     console.log(this.props);
+    let displayNumResults = this.props.nums.map(number => {
+      return number;
+    });
     return (
-      <div className="results">
+      <div className="results" id="display">
         Results:
-        {this.props.data.payload}
+        {displayNumResults}
       </div>
     );
   }
@@ -15,7 +18,7 @@ class Results extends Component {
 
 function mapStateToProps(data) {
   return {
-    data: data.numbersReducer
+    nums: data.numbersReducer,
   };
 }
 export default connect(
