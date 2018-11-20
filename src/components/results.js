@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 
 class Results extends Component {
   render() {
-    let displayNumResults = this.props.nums.map(number => {
+    let numResults = this.props.nums.map(number => {
       return number;
     });
+    let displayNumResults = numResults.length < 1 ? '0' : numResults;
     return (
-      <div className="results">
-        Results:
+      <div className="results" id="display">
         {displayNumResults}
       </div>
     );
