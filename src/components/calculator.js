@@ -11,6 +11,12 @@ import { eqClicked } from "../actions/eqClicked";
 import { clrClicked } from "../actions/clrClicked";
 
 class Calculator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: this.props
+    }
+  }
   handleNumber(e) {
     this.props.numberClicked(e);
   }
@@ -25,7 +31,8 @@ class Calculator extends Component {
   }
   render() {
     return (
-      <div className="calculator" id="display">
+      <div className="calculator">
+        Results:
         <Results />
         <ul>
           <Operators operatorClicked={(this.handleOperation = this.handleOperation.bind(this))}/>
