@@ -15,10 +15,6 @@ export default function opDisplayReducer() {
     {
       id: "divide",
       operation: "/"
-    },
-    {
-      id: "clear",
-      operation: "clear"
     }
   ];
 }

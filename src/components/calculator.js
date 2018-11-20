@@ -4,9 +4,11 @@ import Numbers from "./numbers";
 import Operators from "./operators";
 import Results from "./results";
 import Equals from "./equals";
+import Clear from "./clear";
 import { nClicked } from "../actions/numClicked";
 import { oClicked } from "../actions/opClicked";
 import { eqClicked } from "../actions/eqClicked";
+import { clrClicked } from "../actions/clrClicked";
 
 class Calculator extends Component {
   handleNumber(e) {
@@ -17,14 +19,18 @@ class Calculator extends Component {
   }
   handleEquals(e) {
     this.props.equalsClicked(e);
+  }  
+  handleClear(e) {
+    this.props.clearClicked(e);
   }
   render() {
     return (
-      <div className="calculator">
+      <div className="calculator" id="display">
         <Results />
         <ul>
           <Operators operatorClicked={(this.handleOperation = this.handleOperation.bind(this))}/>
           <Equals equalsClicked={(this.handleEquals = this.handleEquals.bind(this))}/>
+          <Clear clearClicked={(this.handleClear = this.handleClear.bind(this))}/>
         </ul>
         <ul>
           <Numbers
@@ -46,6 +52,9 @@ function maptDispatchToProps(dispatch) {
     },
     equalsClicked: data => {
       dispatch(eqClicked(data));
+    },
+    clearClicked: data => {
+      dispatch(clrClicked(data));
     }
   };
 }
