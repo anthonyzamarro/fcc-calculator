@@ -1,0 +1,19 @@
+.calculator {
+	max-width: 50%;
+	text-align: center;
+	margin: auto;
+	padding: 50px;
+	.operations {
+		display: flex;
+		li {
+			flex: 0 0 20px;
+		}
+	}
+	.numbers {
+		display: flex;
+		flex-wrap: wrap;
+		li {
+			flex: 0 0 75px;
+		}
+	}
+}

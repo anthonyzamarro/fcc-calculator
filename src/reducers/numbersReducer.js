@@ -2,8 +2,11 @@ function evaluateArray(array) {
   console.log("array before", array);
   let a = array.join("");
   let groupVals = a.match(/[\d]+|[\D]+/g);
+  if (groupVals.includes('.')) {
+    groupVals = groupVals.join('').match(/\.[\d]|[\d]+\.[\d]+|\.[\d]|[\d]+|[\D]|\.[\D]+/g);
+  }
   let negativeFinal = array.slice(0, 1).pop();
-  if (parseInt(negativeFinal) < 0) {
+  if (parseFloat(negativeFinal) < 0) {
     return negativeFinal;
   }
   if (groupVals.includes('*')) {
@@ -12,13 +15,11 @@ function evaluateArray(array) {
   		if (v === '*') {
         prev = arr[i - 1];
         next = arr[i + 1];
-        product = parseInt(prev) * parseInt(next);
+        product = parseFloat(prev) * parseFloat(next);
       };
       return product;
     });
-    //example: 1+2*3*4
     let rep = a.replace(`${prev}*${next}`, product.toString());
-    // console.log('a', a, 'product', product, 'rep', rep);
     return evaluateArray([rep]);
   } else if (groupVals.includes('/')) {
     let quotient, prev, next;
@@ -26,7 +27,7 @@ function evaluateArray(array) {
       if (v === '/') {
         prev = arr[i - 1];
         next = arr[i + 1];
-        quotient = parseInt(prev) / parseInt(next);
+        quotient = parseFloat(prev) / parseFloat(next);
       };
       return quotient;
     });
@@ -38,13 +39,12 @@ function evaluateArray(array) {
       if (v === '+') {
         prev = arr[i - 1];
         next = arr[i + 1];
-        sum = parseInt(prev) + parseInt(next);
+        sum = parseFloat(prev) + parseFloat(next);
+        console.log(sum);
       };
       return sum;
     });
-    //example: 1+2*3*4
     let rep = a.replace(`${prev}+${next}`, sum.toString());
-    // console.log('a', a, 'product', product, 'rep', rep);
    return evaluateArray([rep]);
   } else if (groupVals.includes('-')) {
     let diff, prev, next;
@@ -52,13 +52,11 @@ function evaluateArray(array) {
       if (v === '-') {
         prev = arr[i - 1];
         next = arr[i + 1];
-        diff = parseInt(prev) - parseInt(next);
+        diff = parseFloat(prev) - parseFloat(next);
       };
       return diff;
     });
-    //example: 1+2*3*4
     let rep = a.replace(`${prev}-${next}`, diff.toString());
-    // console.log('a', a, 'product', product, 'rep', rep);
     return evaluateArray([rep]);
   }
   return a;
@@ -73,11 +71,25 @@ export default function(state = [], action) {
       if (zeroFirst === "0") {
         numberArray.shift();
       }
+      numberArray.forEach((a,i,arr) => {
+        if (a === '.') {
+          if (arr[i + 1] === '.') {
+            let index = arr.lastIndexOf(arr[i+1]);
+            arr.splice(index, 1);
+          }
+        }
+      });
+      console.log(numberArray);
       return numberArray;
     case "OPERATOR_CLICKED":
       let operatorArray = state.slice();
       operatorArray.push(action.payload);
       return operatorArray;
+    // case "DECIMAL_CLICKED":
+    //   let decState = state.slice();
+    //   let dec = [action.payload];
+    //   let addDec = decState.concat(dec);
+    //   return addDec;
     case "EQUALS_CLICKED":
       let equalsArray = state.slice();
       // 3 + 5 * 6 - 2 / 4
