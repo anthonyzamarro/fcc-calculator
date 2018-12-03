@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 
 const Clear = props => {
   return props.clrDisplayReducer.map(clear => (
-    <li 
+    <div 
       key={clear.id}
       id={clear.id}
+      className="clear"
       onClick={e => props.clearClicked(clear.clear)}
     >
       {clear.clear}
-    </li>
+    </div>
   ));
 };
 

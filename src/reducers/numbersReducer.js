@@ -71,19 +71,42 @@ export default function(state = [], action) {
       if (zeroFirst === "0") {
         numberArray.shift();
       }
+      let j = numberArray.join('').match(/[\-+*/]+|\.[0-9]+|[0-9]+\.?[0-9]+/g);
+      console.log(j);
       numberArray.forEach((a,i,arr) => {
+        // console.log(a, arr);
         if (a === '.') {
           if (arr[i + 1] === '.') {
             let index = arr.lastIndexOf(arr[i+1]);
             arr.splice(index, 1);
           }
+          // let firstIndex = arr.indexOf('.');
+          // let lastIndex = arr.lastIndexOf('.');
+          // if (firstIndex < lastIndex) {
+          //   arr.splice(lastIndex, 1);
+          // }
         }
       });
-      console.log(numberArray);
       return numberArray;
     case "OPERATOR_CLICKED":
       let operatorArray = state.slice();
       operatorArray.push(action.payload);
+      let opFirst = operatorArray[0];
+      switch(opFirst) {
+        case '+':
+          operatorArray.shift();
+          break;
+        case '-':
+          operatorArray.shift();
+          break;
+        case '/':
+          operatorArray.shift();
+          break;
+        case '*':
+          operatorArray.shift();
+          break;
+        default:
+      }
       return operatorArray;
     // case "DECIMAL_CLICKED":
     //   let decState = state.slice();

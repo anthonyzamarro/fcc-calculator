@@ -1,19 +1,49 @@
+li {
+	cursor: pointer;
+	list-style: none;
+	border-radius: 3px;
+	&:hover {
+		color: #fff;
+		background: #001;
+	}
+}
+.App {
+	width: 70%;
+    margin: auto;
+}
 .calculator {
 	max-width: 50%;
 	text-align: center;
 	margin: auto;
 	padding: 50px;
+	display: flex;
+	flex-wrap: wrap;
+	background: lightgray;
+	border-radius: 5px;
+	.results {
+		flex: 0 0 22%;
+	}
+	.clear {
+		flex: 0 0 72%;
+	}
 	.operations {
 		display: flex;
+		flex: 0 0 44%;
+    	flex-direction: column;
+    	align-items: flex-start;
+    	padding: 0;
+    	order: 1;
 		li {
 			flex: 0 0 20px;
+			width: 50px;
 		}
 	}
 	.numbers {
 		display: flex;
 		flex-wrap: wrap;
+		flex: 0 0 40%;
 		li {
-			flex: 0 0 75px;
+			flex: 0 0 55px;
 		}
 	}
 }

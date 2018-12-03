@@ -5,7 +5,7 @@ import Operators from "./operators";
 import Results from "./results";
 import Equals from "./equals";
 import Clear from "./clear";
-import Decimal from "./decimal";
+// import Decimal from "./decimal";
 import { nClicked } from "../actions/numClicked";
 import { oClicked } from "../actions/opClicked";
 import { eqClicked } from "../actions/eqClicked";
@@ -19,6 +19,39 @@ class Calculator extends Component {
       input: this.props
     }
   }
+  componentDidMount() {
+    document.addEventListener('keyup', (e) => {
+          // console.log(e);
+      for(let i = 48; i <= 58; i++) {
+        if (e.keyCode === i) {
+          this.props.numberClicked(e.key);
+        }
+      }
+      switch(e.keyCode) {
+        case 187:
+          this.props.operatorClicked(e.key);
+          break;
+        case 189:
+          this.props.operatorClicked(e.key);
+          break;
+        case 56:
+        // console.log(e)
+          this.props.operatorClicked(e.key);
+        break;
+        case 191:
+          this.props.operatorClicked(e.key);
+          break;
+        case 13:
+          this.props.equalsClicked(e.key);
+          break;
+        case 27:
+          this.props.clearClicked(e.key);
+          break;
+        default:
+          // console.log(e);
+      }
+    });
+  }  
   handleNumber(e) {
     this.props.numberClicked(e);
   }
@@ -39,7 +72,7 @@ class Calculator extends Component {
       <div className="calculator">
         Results:
         <Results />
-        <Clear className="clear" clearClicked={(this.handleClear = this.handleClear.bind(this))}/>
+        <Clear clearClicked={(this.handleClear = this.handleClear.bind(this))}/>
         <ul className="operations">
           <Operators operatorClicked={(this.handleOperation = this.handleOperation.bind(this))}/>
           <Equals equalsClicked={(this.handleEquals = this.handleEquals.bind(this))}/>
@@ -47,11 +80,6 @@ class Calculator extends Component {
         <ul className="numbers">
           <Numbers
             numberClick={(this.handleNumber = this.handleNumber.bind(this))}
-          />
-        </ul>
-        <ul>
-          <Decimal
-            decimalClicked={(this.handleNumber = this.handleDecimal.bind(this))}
           />
         </ul>
       </div>
