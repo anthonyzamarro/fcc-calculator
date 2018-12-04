@@ -71,22 +71,31 @@ export default function(state = [], action) {
       if (zeroFirst === "0") {
         numberArray.shift();
       }
-      let j = numberArray.join('').match(/[\-+*/]+|\.[0-9]+|[0-9]+\.?[0-9]+/g);
-      console.log(j);
-      numberArray.forEach((a,i,arr) => {
-        // console.log(a, arr);
-        if (a === '.') {
-          if (arr[i + 1] === '.') {
-            let index = arr.lastIndexOf(arr[i+1]);
-            arr.splice(index, 1);
-          }
-          // let firstIndex = arr.indexOf('.');
-          // let lastIndex = arr.lastIndexOf('.');
-          // if (firstIndex < lastIndex) {
-          //   arr.splice(lastIndex, 1);
-          // }
-        }
-      });
+      // let j = numberArray.join('').match(/[-+*/]+|[\d]+|\.[0-9]+(?!\.)|[0-9]+\.?[0-9]+(?!\.)/g);
+      // match a decimal number that can have the point at the beginning or somewhere in the middle
+      // once that decimal is matched, there cannot be any more decimals to follow it until 
+      // the next operator sign is matched. 
+      // cannot have consecutive decimals in a row.
+      // cannot have consecutive operators in a row.
+      let j = numberArray.join('').match(/^\.|[-+/*]?([0-9]*\.{0,1}[0-9]+|[0-9]+)/g);
+      // if (j !== null) {
+        console.log(j.join('').split(''));
+      // }
+      // numberArray.forEach((a,i,arr) => {
+      //   if (a === '.') {
+      //     if (arr[i + 1] === '.') {
+      //       let index = arr.lastIndexOf(arr[i+1]);
+      //       arr.splice(index, 1);
+      //     }
+      //     let firstIndex = arr.indexOf(a);
+      //     let lastIndex = arr.lastIndexOf(a);
+      //     if (firstIndex < lastIndex && Number.isInteger(parseInt(arr[i + 1]))) {
+      //       // arr.splice(lastIndex, 1);
+      //     }
+      //   }
+      // });
+      // console.log(numberArray);
+      // return j.join('').split('');
       return numberArray;
     case "OPERATOR_CLICKED":
       let operatorArray = state.slice();
