@@ -73,19 +73,14 @@ export default function(state = [], action) {
       if (zeroFirst === "0") {
         numberArray.shift();
       }
-      // let j = numberArray.join('').match(/^\.|[-+*/]+|[\d]+|\.[0-9]+\.|[0-9]+\.?[0-9]+/g);
-      // match a decimal number that can have the point at the beginning or somewhere in the middle
-      // once that decimal is matched, there cannot be any more decimals to follow it until
-      // the next operator sign is matched.
-      // cannot have consecutive decimals in a row.
-      // cannot have consecutive operators in a row.
+      // ([-+*/](?=\.|[\d]+) ---> matches operators
 
-      // \.[\d] +| [\d] +| ([\d] *\.[\d] +)| [-+* /](?![\D]+)
+      // ([.]{0,1}[\d]+)?|[\d]+\.[\d]+|[\d]|([-+*/](?=\.|[\d]+)) ---> most recent
 
-      // \.[\d]+|[\d]+|([\d]*\.[\d]+)|([-+*/])(?![\D]+)
+      // let j = numberArray.join("").match(/(^\.{0,1}|[\d]+)|[\d]*\.[\d]+|[\d]|[-+*/](?![\D]+)/g);
 
-      let j = numberArray.join("").match(/[.][\d]+[-+*/]+|[\d]+[.][\d]+/g);
-      console.log(j.join("").split(""));
+      let j = numberArray.join("").match(/^\.[\d]+|[\d]+\.[\d]+|[\d]|[-+*/](?![\D]+)/g);
+      console.log(j);
       // numberArray.forEach((a,i,arr) => {
       //   if (a === '.') {
       //     if (arr[i + 1] === '.') {
@@ -101,7 +96,7 @@ export default function(state = [], action) {
       // });
       // console.log(numberArray);
       // return j.join('').split('');
-      return j.join("").split("");
+      return numberArray;
     case "OPERATOR_CLICKED":
       let operatorArray = state.slice();
       operatorArray.push(action.payload);
