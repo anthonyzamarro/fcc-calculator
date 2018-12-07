@@ -74,28 +74,30 @@ export default function(state = [], action) {
         numberArray.shift();
       }
       // ([-+*/](?=\.|[\d]+) ---> matches operators
+      // ^(?:\d*\.\d{1,}|\d+|)$
 
-      // ([.]{0,1}[\d]+)?|[\d]+\.[\d]+|[\d]|([-+*/](?=\.|[\d]+)) ---> most recent
+      // ^([\d]*\.{1,}[\d]+|[\d]+)|([-+*/](?=\.|[\d]+)|[\d])
 
       // let j = numberArray.join("").match(/(^\.{0,1}|[\d]+)|[\d]*\.[\d]+|[\d]|[-+*/](?![\D]+)/g);
 
-      let j = numberArray.join("").match(/^\.[\d]+|[\d]+\.[\d]+|[\d]|[-+*/](?![\D]+)/g);
-      console.log(j);
-      // numberArray.forEach((a,i,arr) => {
-      //   if (a === '.') {
-      //     if (arr[i + 1] === '.') {
-      //       let index = arr.lastIndexOf(arr[i+1]);
-      //       arr.splice(index, 1);
-      //     }
-      //     let firstIndex = arr.indexOf(a);
-      //     let lastIndex = arr.lastIndexOf(a);
-      //     if (firstIndex < lastIndex && Number.isInteger(parseInt(arr[i + 1]))) {
-      //       // arr.splice(lastIndex, 1);
-      //     }
-      //   }
-      // });
-      // console.log(numberArray);
-      // return j.join('').split('');
+      let j = numberArray.join("").match(/^([\d]*\.{1,}[\d]+|[\d]+)|([-+*/](?=\.|[\d]))|\.[\d]+|[\d]+/g);
+      // console.log(j);
+      let b;
+      if (j !== null) {
+        b=j.join('').split(/([-+*/])/).filter((a,i,arr) => {
+          if (a.includes('.')) {
+            let firstIndex = a.indexOf('.');
+            let lastIndex = a.lastIndexOf('.');
+            if (firstIndex < lastIndex) {
+              a.substring(0, lastIndex);
+              // return a;
+            }
+          }
+          console.log(a, arr);
+          return a;
+        })
+      }
+      // console.log(b);
       return numberArray;
     case "OPERATOR_CLICKED":
       let operatorArray = state.slice();
