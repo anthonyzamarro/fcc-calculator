@@ -68,37 +68,33 @@ export default function(state = [], action) {
   switch (action.type) {
     case "NUMBER_CLICKED":
       let numberArray = state.slice();
+      console.log(numberArray);
       numberArray.push(action.payload);
       let zeroFirst = numberArray[0];
       if (zeroFirst === "0") {
         numberArray.shift();
       }
       // ([-+*/](?=\.|[\d]+) ---> matches operators
-      // ^(?:\d*\.\d{1,}|\d+|)$
-
-      // ^([\d]*\.{1,}[\d]+|[\d]+)|([-+*/](?=\.|[\d]+)|[\d])
-
-      // let j = numberArray.join("").match(/(^\.{0,1}|[\d]+)|[\d]*\.[\d]+|[\d]|[-+*/](?![\D]+)/g);
-
-      let j = numberArray.join("").match(/^([\d]*\.{1,}[\d]+|[\d]+)|([-+*/](?=\.|[\d]))|\.[\d]+|[\d]+/g);
+      // let j = numberArray.join("").match(/^([\d]*\.{1,}[\d]+|[\d]+)|([-+*/](?=\.|[\d]))|\.[\d]+|[\d]+/g);
       // console.log(j);
-      let b;
-      if (j !== null) {
-        b=j.join('').split(/([-+*/])/).filter((a,i,arr) => {
-          if (a.includes('.')) {
-            let firstIndex = a.indexOf('.');
-            let lastIndex = a.lastIndexOf('.');
-            if (firstIndex < lastIndex) {
-              a.substring(0, lastIndex);
-              // return a;
-            }
-          }
-          console.log(a, arr);
-          return a;
-        })
-      }
-      // console.log(b);
-      return numberArray;
+
+      // credit for this awesome code goes to this person:
+      // https://stackoverflow.com/questions/53697325/javascript-regex-to-match-math-expression/53697367#53697367
+      const clean = str => str
+      // Match zero or more digits, followed by a decimal,
+      // followed by more decimal and period characters
+      // For everything past the first decimal, replace decimals with the empty string
+      .replace(
+        /(\d*\.)([\d.]+)/g,
+        (_, g1, g2) => g1 + g2.replace(/\./g, '')
+      )
+      // Match 2 or more operators, capture the last operator in a group
+      // Replace with the last operator captured
+      .replace(
+        /([-+/*]){2,}/g,
+        '$1'
+      );
+      return [clean(numberArray.join(''))];
     case "OPERATOR_CLICKED":
       let operatorArray = state.slice();
       operatorArray.push(action.payload);
