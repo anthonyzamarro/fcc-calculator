@@ -35,32 +35,57 @@ function evaluateArray(array) {
     });
     let rep = a.replace(`${prev}/${next}`, quotient.toString());
     return evaluateArray([rep]);
-  } else if (groupVals.includes("+")) {
-    let sum, prev, next;
-    groupVals.filter((v, i, arr) => {
-      if (v === "+") {
-        prev = arr[i - 1];
-        next = arr[i + 1];
-        sum = parseFloat(prev) + parseFloat(next);
-        console.log(sum);
-      }
-      return sum;
-    });
-    let rep = a.replace(`${prev}+${next}`, sum.toString());
-    return evaluateArray([rep]);
-  } else if (groupVals.includes("-")) {
-    let diff, prev, next;
-    groupVals.filter((v, i, arr) => {
-      if (v === "-") {
-        prev = arr[i - 1];
-        next = arr[i + 1];
-        diff = parseFloat(prev) - parseFloat(next);
-      }
-      return diff;
-    });
-    let rep = a.replace(`${prev}-${next}`, diff.toString());
-    return evaluateArray([rep]);
+  } else if (groupVals.includes("+") || groupVals.includes("-")) {
+    // console.log(groupVals);
+    let total, prev, next;
+      groupVals.filter((v,i,arr) => {
+        switch(v) {
+          case '+':
+            prev = arr[ i - 1];
+            next = arr[ i + 1];
+            let s = arr.slice(arr.indexOf(prev), arr.indexOf(next));
+            console.log(s);
+            // total = parseFloat(prev) + parseFloat(next);
+            // return evaluateArray([total]);
+          // case '-':
+          //   prev = arr[ i - 1]
+          //   next = arr[ i + 1]
+          //   total = parseFloat(prev) - parseFloat(next);
+          //   return evaluateArray([total]);
+          default: 
+          console.log('blah');
+        }
+        console.log(total, prev, next);
+      });
+      // return evaluateArray([total]);
+    // return evaluateArray([eval(groupVals.join(''))]);
   }
+  // else if (groupVals.includes("+")) {
+  //   let sum, prev, next;
+  //   groupVals.filter((v, i, arr) => {
+  //     if (v === "+") {
+  //       prev = arr[i - 1];
+  //       next = arr[i + 1];
+  //       sum = parseFloat(prev) + parseFloat(next);
+  //     }
+  //     return sum;
+  //   });
+  //   let rep = a.replace(`${prev}+${next}`, sum.toString());
+  //   return evaluateArray([rep]);
+  // } 
+  // else if (groupVals.includes("-")) {
+  //   let diff, prev, next;
+  //   groupVals.filter((v, i, arr) => {
+  //     if (v === "-") {
+  //       prev = arr[i - 1];
+  //       next = arr[i + 1];
+  //       diff = parseFloat(prev) - parseFloat(next);
+  //     }
+  //     return diff;
+  //   });
+  //   let rep = a.replace(`${prev}-${next}`, diff.toString());
+  //   return evaluateArray([rep]);
+  // }
   return a;
 }
 
@@ -68,7 +93,6 @@ export default function(state = [], action) {
   switch (action.type) {
     case "NUMBER_CLICKED":
       let numberArray = state.slice();
-      console.log(numberArray);
       numberArray.push(action.payload);
       let zeroFirst = numberArray[0];
       if (zeroFirst === "0") {
@@ -86,7 +110,10 @@ export default function(state = [], action) {
       // For everything past the first decimal, replace decimals with the empty string
       .replace(
         /(\d*\.)([\d.]+)/g,
-        (_, g1, g2) => g1 + g2.replace(/\./g, '')
+        (_, g1, g2) => {
+          // console.log('_',_,'g1',g1,'g2',g2)
+          return g1 + g2.replace(/\./g, '')
+        }
       )
       // Match 2 or more operators, capture the last operator in a group
       // Replace with the last operator captured
