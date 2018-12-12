@@ -36,28 +36,23 @@ function evaluateArray(array) {
     let rep = a.replace(`${prev}/${next}`, quotient.toString());
     return evaluateArray([rep]);
   } else if (groupVals.includes("+") || groupVals.includes("-")) {
-    // console.log(groupVals);
-    let total, prev, next;
-      groupVals.filter((v,i,arr) => {
-        switch(v) {
-          case '+':
-            prev = arr[ i - 1];
-            next = arr[ i + 1];
-            let s = arr.slice(arr.indexOf(prev), arr.indexOf(next));
-            console.log(s);
-            // total = parseFloat(prev) + parseFloat(next);
-            // return evaluateArray([total]);
-          // case '-':
-          //   prev = arr[ i - 1]
-          //   next = arr[ i + 1]
-          //   total = parseFloat(prev) - parseFloat(next);
-          //   return evaluateArray([total]);
-          default: 
-          console.log('blah');
-        }
-        console.log(total, prev, next);
-      });
-      // return evaluateArray([total]);
+    groupVals.filter((a,i,arr) => {
+      if (a === '-') {
+        arr[i + 1] = `-${arr[i + 1]}`;
+        return arr;
+      }
+      // return arr.join('').replace(/-/, '+');;
+    });
+    // let g = groupVals.join('').replace(/[-]/, '+');
+    let t = groupVals.filter((a,i,v) => {
+      if (parseFloat(a)) return a;
+    })
+    // console.log(t);
+    let g = t.reduce((acc, curr) => {
+
+      return parseFloat(acc) + parseFloat(curr)
+    });
+    return [g];
     // return evaluateArray([eval(groupVals.join(''))]);
   }
   // else if (groupVals.includes("+")) {
