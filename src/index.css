@@ -11,9 +11,10 @@ li {
   margin: auto; }
 
 .calculator {
-  max-width: 50%;
   text-align: center;
   margin: auto;
+  height: 300px;
+  width: 300px;
   padding: 50px;
   display: flex;
   flex-wrap: wrap;
@@ -27,7 +28,7 @@ li {
     display: flex;
     flex: 0 0 44%;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 0;
     order: 1; }
     .calculator .operations li {
@@ -39,5 +40,19 @@ li {
     flex: 0 0 40%; }
     .calculator .numbers li {
       flex: 0 0 55px; }
+
+@media screen and (max-width: 512px) {
+  .App {
+    width: 100%; }
+    .App .calculator {
+      width: 200px;
+      padding: 20px; }
+      .App .calculator .operations {
+        flex: 0 0 auto; }
+      .App .calculator .numbers {
+        padding: 0;
+        flex: 2 0 auto; }
+        .App .calculator .numbers li {
+          flex: 0 0 48px; } }
 
 /*# sourceMappingURL=index.css.map */

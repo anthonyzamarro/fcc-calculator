@@ -8,9 +8,7 @@ function evaluateArray(array) {
       .match(/\.[\d]|[\d]+\.[\d]+|\.[\d]|[\d]+|[\D]|\.[\D]+/g);
   }
   let negativeFinal = array.slice(0, 1).pop();
-  if (parseFloat(negativeFinal) < 0) {
-    return negativeFinal;
-  }
+  if (parseFloat(negativeFinal) < 0) return negativeFinal;
   if (groupVals.includes("*")) {
     let product, prev, next;
     groupVals.filter((v, i, arr) => {
@@ -41,17 +39,9 @@ function evaluateArray(array) {
         arr[i + 1] = `-${arr[i + 1]}`;
         return arr;
       }
-      // return arr.join('').replace(/-/, '+');;
     });
-    // let g = groupVals.join('').replace(/[-]/, '+');
-    let t = groupVals.filter((a,i,v) => {
-      if (parseFloat(a)) return a;
-    })
-    // console.log(t);
-    let g = t.reduce((acc, curr) => {
-
-      return parseFloat(acc) + parseFloat(curr)
-    });
+    let t = groupVals.filter((a,i,v) => {if (parseFloat(a)) return a})
+    let g = t.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr));
     return [g];
     // return evaluateArray([eval(groupVals.join(''))]);
   }
@@ -144,7 +134,6 @@ export default function(state = [], action) {
     //   return addDec;
     case "EQUALS_CLICKED":
       let equalsArray = state.slice();
-      // 3 + 5 * 6 - 2 / 4
       return [evaluateArray(equalsArray)];
     case "CLEAR_CLICKED":
       let clearArray = state.slice();
