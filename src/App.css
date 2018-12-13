@@ -1,4 +1,4 @@
-/*.App {
+.App {
   text-align: center;
 }
 
@@ -30,10 +30,3 @@
     transform: rotate(360deg);
   }
 }
-
-li {
-  list-style: none;
-  cursor: pointer;
-  max-width: 100px;
-  text-align: center;
-}*/

@@ -2,7 +2,7 @@
   "name": "calculator",
   "version": "0.1.0",
   "private": true,
-  "home": "https://anthonyzamarro.github.io/fcc-calculator",
+  "home": "https://anthonyzamarro.github.io/fcc-calculator/",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "react": "^16.6.3",
