@@ -70,9 +70,8 @@ class Calculator extends Component {
   render() {
     return (
       <div className="calculator">
-        Results:
-        <Results />
-        <Clear clearClicked={(this.handleClear = this.handleClear.bind(this))}/>
+        <div className="results-container"><Results /></div>
+        <div className="clear-container"><Clear clearClicked={(this.handleClear = this.handleClear.bind(this))}/></div>
         <ul className="operations">
           <Operators operatorClicked={(this.handleOperation = this.handleOperation.bind(this))}/>
           <Equals equalsClicked={(this.handleEquals = this.handleEquals.bind(this))}/>
