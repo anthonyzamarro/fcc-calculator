@@ -3,7 +3,7 @@
   This project is a part of the [FreeCodeCamp](https://www.freecodecamp.com) front end
   libraries project.
 
-  You can view my finished work [here](https://anthonyzamarro.github.io/).
+  You can view my finished work [here](https://anthonyzamarro.github.io/fcc-calculator).
 
 ## How to use
 
