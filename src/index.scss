@@ -21,8 +21,8 @@ li {
 .calculator {
 	text-align: center;
 	margin: auto;
-	height: 200px;
-	width: 300px;
+	height: 300px;
+	width: 500px;
 	padding: 20px 12px;
 	display: flex;
 	flex-wrap: wrap;
@@ -36,6 +36,7 @@ li {
 		background: #fff;
     	border-radius: 4px;
     	align-items: center;
+    	padding: 12px 0;
 		.results {
 			flex: 0 0 57%;
     		text-align: right;
@@ -45,7 +46,8 @@ li {
 	.clear-container {
 		display: flex;
 		justify-content: center;
-		width: 100%;
+		width: 75%;
+		padding: 12px 0;
 		margin-top: 4px;
 		background: #292525;
 		color: #fff;
@@ -67,11 +69,14 @@ li {
     	flex-direction: column;
     	align-items: center;
     	padding: 0;
+    	margin-top: -52px;
     	order: 1;
 		li {
-			flex: 0 0 20px;
-			width: 50px;
+			// flex: 0 0 41px;
+			padding: 11.5px 0;
+			width: 90px;
 			align-self: center;
+			margin-top: 4px;
 		}
 	}
 	.numbers {
@@ -80,11 +85,12 @@ li {
 		flex: 0 0 75%;
 		padding: 0;
 		justify-content: center;
+		margin-top: 0px;
 		li {
-			flex: 1 0 55px;
-			align-self: center;
-    		padding: 4px 0;
-    		box-shadow: -2px 2px 0px #000;
+			flex: 1 0 95px;
+		    align-self: center;
+		    padding: 10px 0;
+		    box-shadow: -2px 2px 0px #000;
 		}
 	}
 }
@@ -96,14 +102,25 @@ li {
 			padding: 20px;
 			.operations {
 				flex: 0 0 auto;
+				flex-direction: row;
+				padding: 3px 0;
+				margin-top: unset;
+				width: 100%;
+				li {
+					width: 20%;
+				}
 			}
 			.numbers {
 				padding: 0;
 				flex: 2 0 auto;
+				margin-bottom: 0;
 				li {
 					flex: 1 0 35px;
 				}
 			}
+		}
+		.clear-container {
+			width: 100%;
 		}
 	}
 }
