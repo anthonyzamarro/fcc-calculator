@@ -15,7 +15,12 @@ li {
 
 .App {
   width: 70%;
-  margin: auto; }
+  margin: auto;
+  background: lightblue;
+  height: 400px; }
+  .App h1 {
+    font-size: 2em;
+    margin-bottom: 4px; }
 
 .calculator {
   text-align: center;
